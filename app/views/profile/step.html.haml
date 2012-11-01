@@ -1,0 +1,16 @@
+%h1 Il faut valider quelques infos de base !
+= form_for(current_user, url: validate_step_path) do |f|
+  .field
+    = f.label :username
+    %br/
+    = f.text_field :username
+  .field
+    = f.label :location
+    %br/
+    = f.text_field :location
+  .field
+    = f.label :gender
+    %br/
+    = f.text_field :gender
+  .actions
+    = f.submit "Valider le profil"

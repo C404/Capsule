@@ -1,0 +1,31 @@
+- if current_user
+  %table{:border => "1"}
+    %tr
+      %th
+        = link_to current_user.username, user_profile_path(:user_id => current_user.id)
+        %br/
+        Voir ma page de profile
+    %tr
+      %td
+        - if current_user.capsules
+          Capsules #{current_user.capsules}
+        - else
+          Capsules 0
+      %td Followers
+      %td Following
+  = link_to "Creer une nouvelle Capsule ?", new_capsul_path
+- else
+  %h3 Vous n'etes pas register et c pas top top
+
+%h4 Les dernieres capsules
+%table
+  %tr
+    %th Content
+    %th User
+  - @capsuls.each do |capsul|
+    %tr
+      %td= link_to capsul.content, capsul_path(capsul)
+      %td
+        = link_to user_profile_path(:user_id => capsul.user_id) do
+          #{User.find(capsul.user_id).username}
+%br/

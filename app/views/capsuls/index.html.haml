@@ -1,0 +1,19 @@
+%h1 Listing capsuls
+%table
+  %tr
+    %th Content
+    %th Video
+    %th User
+    %th
+    %th
+    %th
+  - @capsuls.each do |capsul|
+    %tr
+      %td= capsul.content
+      %td= capsul.video
+      %td= User.find(capsul.user_id).username
+      %td= link_to 'Show', capsul
+      %td= link_to 'Edit', edit_capsul_path(capsul)
+      %td= link_to 'Destroy', capsul, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Capsul', new_capsul_path

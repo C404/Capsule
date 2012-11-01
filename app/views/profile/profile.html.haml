@@ -1,0 +1,12 @@
+%h1 Profile#profile
+%p Find me in app/views/profile/profile.html.haml
+
+- if @user_profile
+  %h4 Profile de #{@user_profile.username}
+  %h5 Title : #{@user_profile.title}
+  %h5 Nbr Capsules : #{@user_profile.capsules}
+  - if @user_profile.gender == 1
+    %h5 Gender : Male
+  - else
+    %h5 Gender : Female
+  %h5 Location : #{@user_profile.location}
