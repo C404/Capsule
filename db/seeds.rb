@@ -5,3 +5,21 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+puts "Adding several users..."
+
+def add_many_users(basename, god, how_many)
+  (1..how_many).each do |num|
+    puts "- Adding #{basename}#{num}"
+    user = User.new
+    user.username = "#{basename.downcase}#{num}"
+    user.email = "#{basename.downcase}#{num}@gmail.com"
+    user.password = "123456"
+    user.password = "123456"
+    user.save!
+  end
+end
+
+add_many_users("Root", true, 5)
+add_many_users("User", false, 10)
+puts "Users are set !"

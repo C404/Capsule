@@ -1,5 +1,8 @@
 Capsule::Application.routes.draw do
 
+  devise_for :users, :path_names => { :sign_up => "register" }
+
+
   # home route (index of website)
   get "home/index"
 
