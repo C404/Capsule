@@ -1,4 +1,0 @@
-Capsule
-=======
-
-Capsule webservice !
