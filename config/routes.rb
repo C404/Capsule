@@ -1,10 +1,17 @@
 Capsule::Application.routes.draw do
 
-  devise_for :users, :path_names => { :sign_up => "register" }
 
+  # auth and all sessions / connect controllers
+  devise_for :users, :path_names => { :sign_up => "register" }
+  match '/auth/facebook/callback', to: 'omniauth#facebook'
+  get "omni_session/connect"
 
   # home route (index of website)
   get "home/index"
+
+
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
