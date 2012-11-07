@@ -1,1 +1,7 @@
 Plate-forme Capsule
+
+CAREFUL !!!!!
+editer son /etc/hosts et ajouter
+127.0.0.1  get-capsule.com
+
+Lancer le site en localhost sur get-capsule.com:3000 pour avoir l'authentification providers facebook et dailymotion !!!!
