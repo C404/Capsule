@@ -4,6 +4,7 @@ Capsule::Application.routes.draw do
   # auth and all sessions / connect controllers
   devise_for :users, :path_names => { :sign_up => "register" }
   match '/auth/facebook/callback', to: 'omniauth#facebook'
+  match '/auth/dailymotion/callback', to: 'omniauth#dailymotion'
   get "omni_session/connect"
 
   # home route (index of website)

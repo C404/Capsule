@@ -3,3 +3,13 @@
 
 - if current_user
   %p #{link_to "Sign out", destroy_user_session_path, :method => :delete}
+
+- unless current_user.user_token.fb_token
+  %p Facebook is not synchronize
+- else
+  %p Facebook is synchronize ! good.
+
+- unless current_user.user_token.da_token
+  %p dailymotion is not synchronize
+- else
+  %p dailymotion is synchronize ! good.
