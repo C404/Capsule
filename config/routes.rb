@@ -1,5 +1,8 @@
 Capsule::Application.routes.draw do
 
+  get "user/show"
+
+  resources :capsuls
 
   # auth and all sessions / connect controllers
   devise_for :users, :path_names => { :sign_up => "register" }
@@ -10,7 +13,8 @@ Capsule::Application.routes.draw do
   # home route (index of website)
   get "home/index"
 
-
+  # any user profil exept current_user profil
+  resources :user, :only => [:show]
 
 
 

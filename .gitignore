@@ -1,0 +1,5 @@
+/log/
+/tmp/
+/.sass-cache/
+/db/schema.rb
+/test/

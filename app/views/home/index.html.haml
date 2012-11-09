@@ -2,14 +2,41 @@
 %p Find me in app/views/home/index.html.haml
 
 - if current_user
+  %h3 #{current_user.username}, here is your main page !
   %p #{link_to "Sign out", destroy_user_session_path, :method => :delete}
 
-- unless current_user.user_token.fb_token
-  %p Facebook is not synchronize
+- if current_user.user_token.nil? or current_user.user_token.fb_token.nil?
+  %p
+    Facebook is not synchronize
+    = link_to "synchronize now !", "/auth/facebook"
 - else
   %p Facebook is synchronize ! good.
 
-- unless current_user.user_token.da_token
-  %p dailymotion is not synchronize
+- if current_user.user_token.nil? or current_user.user_token.da_token.nil?
+  %p
+    dailymotion is not synchronize
+    = link_to "synchronize now !", "/auth/dailymotion"
 - else
   %p dailymotion is synchronize ! good.
+
+= link_to 'See all capsules', capsuls_path
+%br
+%br
+= link_to 'New Capsul', new_capsul_path
+%hr
+- @capsuls.each do |capsul|
+  %tr
+    - owner = User.find(capsul.user_id) if capsul
+    - if current_user and owner.id != current_user.id
+      %td= link_to "#{owner.username}", user_path(owner)
+    - else
+      %td [Ma capsule]
+    %br
+    %td= capsul.description
+    %br
+    %td= link_to 'Show', capsul
+    - if current_user and owner.id == current_user.id
+      %td= link_to 'Destroy', capsul, method: :delete, data: { confirm: 'Are you sure?' }
+  %br
+  %h9 --------------------------------
+  %br

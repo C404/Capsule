@@ -1,0 +1,16 @@
+= form_for @capsul do |f|
+  - if @capsul.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@capsul.errors.count, "error")} prohibited this capsul from being saved:"
+      %ul
+        - @capsul.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :video
+    = f.text_field :video
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%p
+  %b Description:
+  = @capsul.description
+%p
+  %b Video:
+  = @capsul.video
+%p
+  %b User:
+  = @owner.username
+
+- if @owner.id == current_user.id
+  = link_to 'Edit', edit_capsul_path(@capsul)
+  \|
+= link_to 'Back', capsuls_path

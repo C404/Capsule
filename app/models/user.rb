@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username
 
   has_one :user_token, :dependent => :destroy
+  has_many :capsuls, :dependent => :destroy
 end

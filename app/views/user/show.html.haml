@@ -1,0 +1,11 @@
+%h1 User#show
+%p Find me in app/views/user/show.html.haml
+
+%h4 Profile de #{@user.username}
+
+
+- @capsuls.each do |capsul|
+  %br
+  %tr
+    %td= capsul.description
+    %td= link_to 'Show', capsul
