@@ -14,26 +14,13 @@ class OmniauthController < ApplicationController
     facebook_email = extra[:raw_info][:email]
     user = User.find_by_email(facebook_email)
     if user.nil? and current_user.nil?
-      generated_password = Devise.friendly_token.first(6)
-      user = User.new(:email => extra[:raw_info][:email],
-                      :username => extra[:raw_info][:name],
-                      :password => generated_password)
-      user.save!
-      user.build_user_token(:fb_token => auth[:credentials][:token])
-      user.user_token.save
+      user = new_user extra, auth, 'fb'
     elsif current_user and current_user.user_token.nil?
-      current_user.build_user_token(:fb_token => auth[:credentials][:token],
-                                    :fb_email => extra[:raw_info][:email],
-                                    :fb_username => extra[:raw_info][:name])
-      current_user.user_token.save
-      facebook_email = current_user.email
+      facebook_email = user_no_token 'fb', extra, auth
     elsif current_user
-      current_user.user_token.fb_token = auth[:credentials][:token]
-      current_user.user_token.save
-      facebook_email = current_user.email
+      facebook_email = current_user_only_need_a_sync 'fb', auth
     else
-      user.user_token.fb_token = auth[:credentials][:token]
-      user.user_token.save
+      new_user_need_a_sync 'fb', user, auth
     end
     respond_to do |format|
       format.html { redirect_to omni_session_connect_path(:mail => facebook_email) }
@@ -72,6 +59,50 @@ class OmniauthController < ApplicationController
     respond_to do |format|
       format.html { redirect_to omni_session_connect_path(:mail => dailymotion_email) }
     end
+  end
+
+  private
+
+  def new_user extra, auth, provider
+    token = provider + '_token'
+    generated_password = Devise.friendly_token.first(6)
+    user = User.new(:email => extra[:raw_info][:email],
+                    :username => extra[:raw_info][:name],
+                    :password => generated_password)
+    user.save
+    user.build_user_token(token.to_s => auth[:credentials][:token])
+    user.user_token.save
+    return user
+  end
+
+  def user_no_token provider, extra, auth
+    token = provider + '_token'
+    p_email = provider + '_email'
+    username = provider + '_username'
+    current_user.build_user_token(token.to_s => auth[:credentials][:token],
+                                  p_email.to_s => extra[:raw_info][:email],
+                                  username.to_s => extra[:raw_info][:name])
+    current_user.user_token.save
+    return current_user.email
+  end
+  
+  def current_user_only_need_a_sync provider, auth
+    if provider == 'fb'
+      current_user.user_token.fb_token = auth[:credentials][:token]
+    elsif provider == 'da'
+      current_user.user_token.da_token = auth[:credentials][:token]
+    end
+    current_user.user_token.save
+    return current_user.email
+  end
+
+  def new_user_need_a_sync provider, user, auth
+    if provider == 'fb'
+      user.user_token.fb_token = auth[:credentials][:token]
+    elsif provider == 'da'
+      current_user.user_token.da_token = auth[:credentials][:token]
+    end
+    user.user_token.save
   end
 
 end
