@@ -1,11 +1,19 @@
 class UserController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+
+  def me
+    if current_user
+      user = User.find(current_user.id)
+      @capsuls = user.capsuls.order('created_at DESC')
+    end
+  end
+
 
   def show
-    redirect_to root_path if current_user.id ==  params[:id].to_i
-    @user ||= User.find(params[:id])
-
-
-    redirect_to root_path, :notice => "user don't exist !" if not @user
+    @user = User.find(params[:id])
     @capsuls = @user.capsuls
+    if current_user and current_user.id == params[:id].to_i
+      redirect_to user_me_url
+    end
   end
 end

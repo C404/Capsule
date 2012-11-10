@@ -3,3 +3,4 @@
 /.sass-cache/
 /db/schema.rb
 /test/
+/db/development.sqlite3

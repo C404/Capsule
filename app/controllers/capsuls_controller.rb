@@ -1,5 +1,5 @@
 class CapsulsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show, :index]
 
   # GET /capsuls
   # GET /capsuls.json

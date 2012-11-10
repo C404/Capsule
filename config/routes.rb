@@ -1,9 +1,8 @@
 Capsule::Application.routes.draw do
 
-  get "user/show"
-
   resources :capsuls
 
+  get "user/me"
   # auth and all sessions / connect controllers
   devise_for :users, :path_names => { :sign_up => "register" }
   match '/auth/facebook/callback', to: 'omniauth#facebook'

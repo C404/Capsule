@@ -10,7 +10,7 @@
   %b User:
   = @owner.username
 
-- if @owner.id == current_user.id
+- if current_user and @owner.id == current_user.id
   = link_to 'Edit', edit_capsul_path(@capsul)
   \|
 = link_to 'Back', capsuls_path

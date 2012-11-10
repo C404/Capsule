@@ -1,25 +1,5 @@
 %h1 Home#index
 %p Find me in app/views/home/index.html.haml
-- if current_user
-  = render :partial => "shared/secondary_menu"
-= link_to 'See all capsules', capsuls_path
-%br
-%br
-= link_to 'New Capsul', new_capsul_path
-%hr
-- @capsuls.each do |capsul|
-  %tr
-    - owner = User.find(capsul.user_id) if capsul
-    - if current_user and owner.id != current_user.id
-      %td= link_to "#{owner.username}", user_path(owner)
-    - else
-      %td [Ma capsule]
-    %br
-    %td= capsul.description
-    %br
-    %td= link_to 'Show', capsul
-    - if current_user and owner.id == current_user.id
-      %td= link_to 'Destroy', capsul, method: :delete, data: { confirm: 'Are you sure?' }
-  %br
-  %h9 --------------------------------
-  %br
+
+- unless current_user
+  = link_to 'login', new_user_session_path
