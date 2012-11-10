@@ -20,18 +20,20 @@ class OmniauthController < ApplicationController
                       :password => generated_password)
       user.save!
       user.build_user_token(:fb_token => auth[:credentials][:token])
-      user.user_token.save!
+      user.user_token.save
     elsif current_user and current_user.user_token.nil?
-      current_user.build_user_token(:fb_token => auth[:credentials][:token])
-      current_user.user_token.save!
+      current_user.build_user_token(:fb_token => auth[:credentials][:token],
+                                    :fb_email => extra[:raw_info][:email],
+                                    :fb_username => extra[:raw_info][:name])
+      current_user.user_token.save
       facebook_email = current_user.email
     elsif current_user
       current_user.user_token.fb_token = auth[:credentials][:token]
-      current_user.user_token.save!
+      current_user.user_token.save
       facebook_email = current_user.email
     else
       user.user_token.fb_token = auth[:credentials][:token]
-      user.user_token.save!
+      user.user_token.save
     end
     respond_to do |format|
       format.html { redirect_to omni_session_connect_path(:mail => facebook_email) }
@@ -53,18 +55,19 @@ class OmniauthController < ApplicationController
                       :password => generated_password)
       user.save!
       user.build_user_token(:da_token => auth[:credentials][:token])
-      user.user_token.save!
+      user.user_token.save
     elsif current_user and current_user.user_token.nil?
-      current_user.build_user_token(:da_token => auth[:credentials][:token])
-      current_user.user_token.save!
+      current_user.build_user_token(:da_token => auth[:credentials][:token],
+                                    :da_email => extra[:raw_info][:email])
+      current_user.user_token.save
       dailymotion_email = current_user.email
     elsif current_user
       current_user.user_token.da_token = auth[:credentials][:token]
-      current_user.user_token.save!
+      current_user.user_token.save
       dailymotion_email = current_user.email
     else
       user.user_token.da_token = auth[:credentials][:token]
-      user.user_token.save!
+      user.user_token.save
     end
     respond_to do |format|
       format.html { redirect_to omni_session_connect_path(:mail => dailymotion_email) }

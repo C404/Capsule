@@ -25,11 +25,15 @@ ActiveRecord::Schema.define(:version => 20121108215238) do
 
   create_table "user_tokens", :force => true do |t|
     t.string   "fb_token"
+    t.string   "fb_username"
+    t.string   "fb_email"
     t.string   "da_token"
+    t.string   "da_email"
     t.string   "tw_token"
+    t.string   "tw_username"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "user_tokens", ["user_id"], :name => "index_user_tokens_on_user_id"
