@@ -1,0 +1,38 @@
+<div class="navbar-inner">
+  <div class="container">
+    <a class="logo brand" href="/">
+      Capsule
+    </a>
+    <ul class="nav">
+      <% if !current_user %>
+      <li><a>SignUp</a></li>
+      <li><a>Login</a></li>
+      <li><a>About</a></li>
+      <% else %>
+      <li><a>My capsules</a></li>
+      <li><a>My subscribtions</a></li>
+      <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown">
+	  <% if current_user and current_user.user_token and current_user.user_token.fb_token %>
+	  <% img_url = "https://graph.facebook.com/me/picture?type=square&access_token=" + current_user.user_token.fb_token.to_s %>
+	  <img src= <%= img_url %> width="19"/>
+	  <% end %>
+	  <%= current_user.username %>
+	  <b class="caret"></b>
+	</a>
+	<ul class="dropdown-menu">
+	  <li><a>My capsules</a></li>
+	  <li><a>Profile</a></li>
+	  <li><a>Settings</a></li>
+	  <li class="divider"></li>
+	  <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+	</ul>
+      </li>
+      <% end %>
+    </ul>
+    <form class="navbar-form pull-right">
+      <input class="span3" type="text" placeholder="">
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </div>
+</div>

@@ -7,9 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= yield %>
-
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <%= render :partial => "shared/menu" %>
+  </div>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>
