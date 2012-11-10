@@ -1,24 +1,7 @@
 %h1 Home#index
 %p Find me in app/views/home/index.html.haml
-
 - if current_user
-  %h3 #{current_user.username}, here is your main page !
-  %p #{link_to "Sign out", destroy_user_session_path, :method => :delete}
-
-- if current_user.user_token.nil? or current_user.user_token.fb_token.nil?
-  %p
-    Facebook is not synchronize
-    = link_to "synchronize now !", "/auth/facebook"
-- else
-  %p Facebook is synchronize ! good.
-
-- if current_user.user_token.nil? or current_user.user_token.da_token.nil?
-  %p
-    dailymotion is not synchronize
-    = link_to "synchronize now !", "/auth/dailymotion"
-- else
-  %p dailymotion is synchronize ! good.
-
+  = render :partial => "shared/secondary_menu"
 = link_to 'See all capsules', capsuls_path
 %br
 %br

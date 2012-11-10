@@ -1,0 +1,14 @@
+<div class="container">
+  <% if  !current_user %>
+    <div class="btn-group btn-group-vertical span2">
+      <a href="#loginModal" role="button" class="btn btn-large btn-info" data-toggle="modal">Login</a>
+      <a href="#signUpModal" role="button" class="btn btn-large btn-info" data-toggle="modal">Signup</a>
+    </div>
+  <% else %>
+    <% if current_user.user_token.nil? or current_user.user_token.fb_token.nil? %>
+      <%= link_to "sync with Facebook", "/auth/facebook", :class => "btn btn-large btn-primary" %>
+    <% elsif current_user.user_token.nil? or current_user.user_token.da_token.nil? %>
+      <%= link_to "sync with Dailymotion", "/auth/dailymotion", :class => "btn btn-large btn-primary" %>
+    <% end %>
+  <% end %>
+</div>

@@ -6,7 +6,7 @@
     <ul class="nav">
       <% if !current_user %>
       <li><a>SignUp</a></li>
-      <li><a href="#loginModal" role="button" data-toggle="modal">Login</a></li>
+      <li><a>Login</a></li>
       <li><a>About</a></li>
       <% else %>
       <li><a>My subscribtions</a></li>

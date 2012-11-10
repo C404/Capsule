@@ -13,7 +13,19 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <div class="container">
-    <%= yield %>
+    <div class="row">
+      <div class="span8">
+	<%= yield %>
+      </div>
+      <div class="span4">
+	<div class="well">
+	  <%= render :partial => "shared/right_sidebar" %>
+	</div>
+      </div>
+    </div>
   </div>
+  <% if !current_user %>
+  <%= render :partial => "shared/login_form" %>
+  <% end %>
 </body>
 </html>
