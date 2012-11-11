@@ -3,3 +3,6 @@
 
 - unless current_user
   = link_to 'login', new_user_session_path
+
+- if current_user
+  = render :partial => "shared/secondary_menu"

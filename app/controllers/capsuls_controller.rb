@@ -1,5 +1,5 @@
 class CapsulsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_user!, :except => [:show, :index, :range]
 
   # GET /capsuls
   # GET /capsuls.json
@@ -8,6 +8,19 @@ class CapsulsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @capsuls }
+    end
+  end
+
+  # GET /capsuls_range?from=int&limit=int&currentUser=bool
+  def range
+    if params[:currentUser] and current_user
+      user = User.find(current_user.id)
+      @capsuls = user.capsuls.order('created_at DESC').limit(params[:limit]).offset(params[:from])
+    else
+      @capsuls = Capsul.order('created_at DESC').limit(params[:limit]).offset(params[:from])
+    end
+    respond_to do |format|
       format.json { render json: @capsuls }
     end
   end
