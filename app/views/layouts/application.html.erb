@@ -24,8 +24,8 @@
       </div>
     </div>
   </div>
-  <% if current_user %>
-  <%# render :partial => "shared/login_form" %>
+  <% if !current_user %>
+  <%= render :partial => "shared/login_form" %>
   <% end %>
 </body>
 </html>
