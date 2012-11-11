@@ -4,6 +4,8 @@ class CreateCapsuls < ActiveRecord::Migration
       t.string :description
       t.string :video
       t.references :user
+      t.integer :latitude
+      t.integer :longitude
 
       t.timestamps
     end
