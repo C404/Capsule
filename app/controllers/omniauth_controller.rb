@@ -15,12 +15,21 @@ class OmniauthController < ApplicationController
     user = User.find_by_email(facebook_email)
     if user.nil? and current_user.nil?
       user = new_user extra, auth, 'fb'
+      user.user_token.fb_id = extra[:raw_info][:id]
+      user.user_token.save
     elsif current_user and current_user.user_token.nil?
       facebook_email = user_no_token 'fb', extra, auth
+      current_user.user_token.fb_id = extra[:raw_info][:id]
+      current_user.user_token.save
     elsif current_user
+      raise
       facebook_email = current_user_only_need_a_sync 'fb', auth
+      current_user.user_token.fb_id = extra[:raw_info][:id]
+      current_user.user_token.save
     else
       new_user_need_a_sync 'fb', user, auth
+      user.user_token.fb_id = extra[:raw_info][:id]
+      user.user_token.save!
     end
     respond_to do |format|
       format.html { redirect_to omni_session_connect_path(:mail => facebook_email) }

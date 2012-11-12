@@ -2,6 +2,7 @@ class CreateUserTokens < ActiveRecord::Migration
   def change
     create_table :user_tokens do |t|
       t.string :fb_token
+      t.string :fb_id
       t.string :fb_username
       t.string :fb_email
       t.string :da_token

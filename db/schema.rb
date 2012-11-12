@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(:version => 20121108215238) do
     t.string   "description"
     t.string   "video"
     t.integer  "user_id"
+    t.integer  "latitude"
+    t.integer  "longitude"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -25,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20121108215238) do
 
   create_table "user_tokens", :force => true do |t|
     t.string   "fb_token"
+    t.string   "fb_id"
     t.string   "fb_username"
     t.string   "fb_email"
     t.string   "da_token"
