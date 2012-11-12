@@ -16,12 +16,6 @@
     <div class="row">
       <div class="span8">
 	<%= yield %>
-	<br />
-	Les deux liens en dessous sont dans le application.html.erb<br />
-	<%= link_to "English", :locale=>'en'%><br />
-	<%= link_to "French", :locale=>'fr'%><br />
-	Il faut les integrer et mettre peut etre un switch avec les flags dessus un truc du genre ...
-	<br />
       </div>
       <div class="span4">
 	<div class="well">
@@ -29,6 +23,7 @@
 	</div>
       </div>
     </div>
+    <%= render :partial => "shared/footer" %>
   </div>
   <% if !current_user %>
   <%= render :partial => "shared/login_form" %>
