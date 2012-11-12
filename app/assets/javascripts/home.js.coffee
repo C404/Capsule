@@ -3,45 +3,53 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 class JsonLoader
-    constructor: (@path, @options) ->
-        @resContainer = $('<div class="json-displayer-container"></div>')
-        @data
-        if !@options then @options = {}
-        if !@options.limit then !@options.limit = 10000
-        if !@options.from then !@options.from = 0
+    constructor: (@path = "", @from = 0, @len = 100, @params = {}) ->
         @buildUrl()
     buildUrl: () ->
         @url = @path
-        @url += "?"
-        for key, val of @options
-            @url += key + "=" + val + "&"
-        @url = @url.slice(0, -1)
+        @url += "?from=" + @from + "&limit=" + (@len + 1)
+        for key, val of @params
+            @url += "&" + key + "=" + val
         @
-    loadJson: (callback) ->
-        $.getJSON(@url, (@data) => callback?())
+    attachParser: (@parser) ->
+        if @parser then @parser.jsonLoader = @
         @
-    displayTo: (dest) ->
-        @dest = $ dest
-        @dest.append @resContainer
+    launch: () ->
+        $.getJSON(@url, (@data) =>
+            if @data.length >= @len + 1
+                more = true
+                @data = @data.slice(0, -1)
+            else
+                more = false
+            @parser.display(@data, more)
+        )
+        @from += @len
+        @buildUrl()
         @
-    display: (limit, attributes) ->
-        col = $("<div></div>")
-        i = 0
-        while (i < limit or limit is undefined) and @data[i]
-            elem = @data[i]
+
+class JsonVideoParser
+    constructor: (@domElem) ->
+        @jsonLoader = null
+        @
+    loadVideo: (id) ->
+        url = "http://www.dailymotion.com/services/oembed?format=javascript&url=http%3A//www.dailymotion.com/video/#{id}&callback=?"
+        domelem = $('<div class="video-container"></div>')
+        $.getJSON(url, (@data) =>
+            $(@data.html).appendTo(domelem)
+        )
+        domelem
+    display: (data, more) ->
+        for elem in data
             block = $("<div></div>")
-            if attributes
-                for key, val of attributes
-                    block.attr key, val
-            block.attr "class", "row-" + i
-            if i % 0 then block.addClass "odd" else block.addClass "even"
-            block.append("<h4>" + elem.description + "</h4>")
-            block.append("<p>" + elem.video + "</p>")
-            col.append block
-            i++
-        @resContainer.append col.contents()
-        @
-
-allCapsules = new JsonLoader("/capsuls_range", {from: 0, limit: 10}).loadJson(-> allCapsules.displayTo("#allCapsules").display(1, {class: "all-capsule-view-row"}))
-
-myCapsules = new JsonLoader("/capsuls_range", {from: 0, limit: 10, currentUser: true}).loadJson(-> myCapsules.displayTo("#myCapsules").display(1, {class: "my-capsule-view-row"}))
+            block.append($("<h4>" + elem.description + "</h4>"))
+            block.append(@loadVideo(elem.video))
+            block.appendTo(@domElem)
+        if more
+            @more = $('<button class="btn">More</button>').appendTo(@domElem)
+            @more.click(=>
+                @more.remove()
+                @jsonLoader.launch()
+            )
+$("document").ready ->
+    new JsonLoader("/capsuls_range", 0, 10).attachParser(new JsonVideoParser($("#allCapsules"))).launch()
+    new JsonLoader("/capsuls_range", 0, 10, {currentUser: true}).attachParser(new JsonVideoParser($("#myCapsules"))).launch()
