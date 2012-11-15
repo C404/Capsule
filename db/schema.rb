@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108215238) do
+ActiveRecord::Schema.define(:version => 20121115101106) do
 
   create_table "capsuls", :force => true do |t|
     t.string   "description"
     t.string   "video"
     t.integer  "user_id"
-    t.integer  "latitude"
-    t.integer  "longitude"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

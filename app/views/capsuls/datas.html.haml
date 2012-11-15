@@ -1,0 +1,21 @@
+- @capsuls.each do |capsul|
+  %div{:class => "video-view"}
+    %h5= link_to capsul.description, capsul_path(capsul)
+    %iframe{:src => "http://www.dailymotion.com/embed/video/#{capsul.video}", :width => "620", :height => "400", :frameborder => "0"}
+
+-# %table
+-#   %tr
+-#     %th Description
+-#     %th Video
+-#     %th User
+-#     %th
+-#     %th
+-#     %th
+
+-#   - @capsuls.each do |capsul|
+-#     %tr
+-#       %td= capsul.description
+-#       %td= capsul.video
+-#       - owner = User.find(capsul.user_id) if capsul
+-#       %td= link_to owner.username, user_path(owner)
+-#       %td= link_to 'Show', capsul_path(capsul)

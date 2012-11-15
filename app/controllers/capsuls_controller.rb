@@ -13,7 +13,7 @@ class CapsulsController < ApplicationController
   end
 
   # GET /capsuls_datas?from=int&limit=int&currentUser=bool
-  def json_datas
+  def datas
     if params[:currentUser] and current_user
       user = User.find(current_user.id)
       @capsuls = user.capsuls.order('created_at DESC').limit(params[:limit]).offset(params[:from])
@@ -22,6 +22,7 @@ class CapsulsController < ApplicationController
     end
     respond_to do |format|
       format.json { render json: @capsuls }
+      format.html # datas.html.erb
     end
   end
 
@@ -29,6 +30,10 @@ class CapsulsController < ApplicationController
   # GET /capsuls/1.json
   def show
     @capsul = Capsul.find(params[:id])
+    @json_map = nil
+    if @capsul.latitude
+      @json_map = @capsul.to_gmaps4rails
+    end
     @owner = User.find(@capsul.user_id) if @capsul
     respond_to do |format|
       format.html # show.html.erb
