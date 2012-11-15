@@ -1,0 +1,12 @@
+en:
+  index:
+    all_capsuls: "All capsules"
+    my_capsuls: "My capsules"
+    new_capsul: "New capsule"
+
+fr:
+  index:
+    all_capsuls: "Toutes les capsules"
+    my_capsuls: "Mes capsules"
+    new_capsul: "Nouvelle capsule"
+

@@ -1,16 +1,16 @@
 %p#notice= notice
 
 %p
-  %b Description:
+  %b #{t 'capsuls.description'}:
   = @capsul.description
 %p
-  %b Video:
+  %b #{t 'capsuls.video'}:
   = @capsul.video
 %p
-  %b User:
+  %b #{t 'capsuls.user'}:
   = @owner.username
 
 - if current_user and @owner.id == current_user.id
-  = link_to 'Edit', edit_capsul_path(@capsul)
+  = link_to "#{t 'capsuls_link.edit'}", edit_capsul_path(@capsul)
   \|
-= link_to 'Back', capsuls_path
+= link_to "#{t 'capsuls_link.back'}", capsuls_path

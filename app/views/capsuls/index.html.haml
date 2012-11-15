@@ -1,13 +1,13 @@
 %h1 Listing capsuls
-
-= link_to 'New Capsul', new_capsul_path
+- if current_user
+  = link_to "#{t 'index.new_capsul'}", new_capsul_path
 %br
 
 %table
   %tr
-    %th Description
-    %th Video
-    %th User
+    %th=t 'capsuls.description'
+    %th=t 'capsuls.video'
+    %th=t 'capsuls.user'
     %th
     %th
     %th
@@ -18,4 +18,4 @@
       %td= capsul.video
       - owner = User.find(capsul.user_id) if capsul
       %td= link_to owner.username, user_path(owner)
-      %td= link_to 'Show', capsul_path(capsul)
+      %td= link_to "#{t 'capsuls_link.show'}", capsul_path(capsul)

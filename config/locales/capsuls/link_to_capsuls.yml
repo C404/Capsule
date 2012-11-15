@@ -1,0 +1,27 @@
+en:
+  capsuls_link:
+    index: "See all capsules"
+    destroy: "Destroy"
+    edit: "Edit"
+    show: "Show"
+    back: "Back"
+    save: "Save capsule"
+  capsuls:
+    description: "Description"
+    video: "Video"
+    user: "Username"
+
+
+fr:
+  capsuls_link:
+    index: "Voir toutes les capsules"
+    destroy: "Detruire"
+    edit: "Editer"
+    show: "Voir"
+    back: "Retour"
+    save: "Enregistrer la capsule"
+  capsuls:
+    description: "Description"
+    video: "Video"
+    user: "Nom D'utilisateur"
+    

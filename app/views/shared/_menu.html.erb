@@ -5,11 +5,11 @@
     </a>
     <ul class="nav">
       <% if !current_user %>
-      <li><a>SignUp</a></li>
-      <li><a data-remote="/users/sign_in .modal-body" data-target="#loginModal" role="button" data-toggle="modal">Login</a></li>
-      <li><a>About</a></li>
+      <li><a><%=t 'user_panel.sign_up' %></a></li>
+      <li><a data-remote="/users/sign_in .modal-body" data-target="#loginModal" role="button" data-toggle="modal"><%=t 'user_panel.login' %></a></li>
+      <li><a><%= t 'user_panel.about' %></a></li>
       <% else %>
-      <li><a>My subscribtions</a></li>
+      <li><a><%=t 'user_panel.subscribtions' %></a></li>
       <li class="dropdown">
 	<a class="dropdown-toggle" data-toggle="dropdown">
 	  <% if current_user and current_user.user_token and current_user.user_token.fb_token %>
@@ -20,10 +20,10 @@
 	  <b class="caret"></b>
 	</a>
 	<ul class="dropdown-menu">
-	  <li><%= link_to "Profile", current_user %></li>
-	  <li><a>Settings</a></li>
+	  <li><%= link_to "#{t 'user_panel.profile'}", current_user %></li>
+	  <li><a><%=t 'user_panel.settings' %></a></li>
 	  <li class="divider"></li>
-	  <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+	  <li><%= link_to "#{t 'user_panel.sign_out' }", destroy_user_session_path, :method => :delete %></li>
 	</ul>
       </li>
       <% end %>
@@ -31,7 +31,7 @@
     <form class="form-search navbar-form pull-right">
       <div class="input-append">
 	<input type="text" class="span2 search-query">
-	<button type="submit" class="btn">Search</button>
+	<button type="submit" class="btn"><%=t 'user_panel.search' %></button>
       </div>
     </form>
   </div>

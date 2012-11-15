@@ -3,10 +3,10 @@
 
 - if current_user
   = render :partial => "shared/secondary_menu"
-= link_to 'See all capsules', capsuls_path
+= link_to "#{t 'capsuls_link.index'}", capsuls_path
 %br
 %br
-= link_to 'New Capsul', new_capsul_path
+= link_to "#{t 'index.new_capsul'}", new_capsul_path
 %hr
 - @capsuls.each do |capsul|
   %tr
@@ -18,9 +18,9 @@
     %br
     %td= capsul.description
     %br
-    %td= link_to 'Show', capsul
+    %td= link_to "#{t 'capsuls_link.show'}", capsul
     - if current_user and owner.id == current_user.id
-      %td= link_to 'Destroy', capsul, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to "#{t 'capsuls_link.destroy'}", capsul, method: :delete, data: { confirm: 'Are you sure?' }
   %br
   %h9 --------------------------------
   %br

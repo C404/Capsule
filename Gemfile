@@ -23,6 +23,9 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-dailymotion', '~> 1.0.0'
 
+#i18n fields 
+gem 'rails-i18n'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

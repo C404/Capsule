@@ -36,6 +36,9 @@ module Capsule
     # To restrict rails-i18n gem to load only theese locales
     config.i18n.available_locales = [:en, :fr]
 
+    # get all dir for locales
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

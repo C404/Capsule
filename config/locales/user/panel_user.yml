@@ -1,0 +1,25 @@
+en:
+  user_panel:
+    login: "Login"
+    about: "About"
+    sign_up: "SignUp"
+    sign_out: "Sign Out"
+    subscribtions: "My subscribtions"
+    settings: "Settings"
+    profile: "My profile"
+    sync_facebook: "Synchronize facebook"
+    sync_dailymotion: "Synchronize dailymotion"
+    search: "Search"
+
+fr:
+  user_panel:
+    login: "Connection"
+    about: "A propos"
+    sign_up: "s'enregistrer"
+    sign_out: "Se déconnecter"
+    subscribtions: "Mes souscriptions"
+    settings: "Vos options"
+    profile: "Mon profil"
+    sync_facebook: "Synchroniser facebook"
+    sync_dailymotion: "Synchroniser dailymotion"
+    search: "Rechercher"
