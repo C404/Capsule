@@ -30,6 +30,10 @@ class CapsulsController < ApplicationController
   # GET /capsuls/1.json
   def show
     @capsul = Capsul.find(params[:id])
+    @json_map = nil
+    if @capsul.latitude
+      @json_map = @capsul.to_gmaps4rails
+    end
     @owner = User.find(@capsul.user_id) if @capsul
     respond_to do |format|
       format.html # show.html.erb

@@ -10,3 +10,7 @@
 = link_to @owner.username, @owner
 
 %iframe{:src => "http://www.dailymotion.com/embed/video/#{@capsul.video}", :width => "620", :height => "400", :frameborder => "0"}
+
+- if @json_map
+  .show_capsule_map_container
+    = gmaps("map_options" => { "detect_location" => true, "center_on_user" => true, "zoom" => 10, "disableDefaultUI" => true, "width" => 100},"markers" => { "data" => @json_map})

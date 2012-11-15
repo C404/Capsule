@@ -12,3 +12,22 @@
  *= require_tree .
  *= require bootstrap.min.css
  */
+
+.map_container img {
+  max-width: none;
+}
+.map_container label {
+  width: auto; display:inline;
+}
+
+.show_capsule_map_container .map_container {
+  width: 620px;
+  height: 260px;
+  border: none;
+  padding: 0;
+}
+
+.show_capsule_map_container .gmaps4rails_map {
+  width: 620px;
+  height: 260px;
+}

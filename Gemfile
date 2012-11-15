@@ -54,3 +54,6 @@ gem 'jquery-rails'
 
 # To use geocoder
 gem "geocoder", "~> 1.1.5"
+
+# for ggMap
+gem 'gmaps4rails'

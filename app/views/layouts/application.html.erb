@@ -18,9 +18,7 @@
 	<%= yield %>
       </div>
       <div class="span4">
-	<div class="well">
-	  <%= render :partial => "shared/right_sidebar" %>
-	</div>
+	<%= render :partial => "shared/right_sidebar" %>
       </div>
     </div>
     <%= render :partial => "shared/footer" %>
@@ -28,5 +26,6 @@
   <% if !current_user %>
   <%= render :partial => "shared/login_form" %>
   <% end %>
+  <%= yield :scripts %>
 </body>
 </html>
