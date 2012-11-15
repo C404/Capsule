@@ -1,16 +1,12 @@
 %p#notice= notice
 
-%p
-  %b Description:
-  = @capsul.description
-%p
-  %b Video:
-  = @capsul.video
-%p
-  %b User:
-  = @owner.username
-
 - if current_user and @owner.id == current_user.id
   = link_to 'Edit', edit_capsul_path(@capsul)
   \|
 = link_to 'Back', capsuls_path
+
+%h3= @capsul.description
+
+= link_to @owner.username, @owner
+
+%iframe{:src => "http://www.dailymotion.com/embed/video/#{@capsul.video}", :width => "620", :height => "400", :frameborder => "0"}

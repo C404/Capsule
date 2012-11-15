@@ -5,7 +5,7 @@
   = link_to 'login', new_user_session_path
 
 %ul.nav.nav-tabs.secondary-nav
-  %li
+  %li{:class => "active"}
     %a{:class => "active", :href => "#allCapsules", :"data-toggle" => "tab"}
       = t('allCapsules')
   - if @user_capsuls
