@@ -6,7 +6,7 @@ Capsule::Application.routes.draw do
   get "omni_session/connect"
 
   # for json request
-  match '/capsuls_datas', to: 'capsuls#json_datas'
+  match '/capsuls_datas', to: 'capsuls#datas'
 
   # match '/:locale' => 'home#index'
   scope '(:locale)', constraints: { locale: /en|fr/ } do

@@ -51,3 +51,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+# To use geocoder
+gem "geocoder", "~> 1.1.5"

@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+  allCapsules: "All capsules"
+  newCapsule: "New capsule"
+  randomCapsules: "Random capsules"
+  myCapsules: "My capsules"

@@ -5,7 +5,18 @@
   <li></li>
 </ul>
 <div class="tab-content">
-  <div class="tab-pane active" id="allCapsules"></div>
+  <div class="tab-pane active" id="allCapsules">
+    <%= debug allCapsuls %>
+    <% allCapsuls.each do |cap| %>
+      <%= debug cap %>
+      <div class="video-view">
+	<h5>
+	  <%= link_to cap.description, capsul_path(cap) %>
+	</h5>
+	<iframe src=<%= "http://www.dailymotion.com/embed/video/#{cap.video}" %> width="620" height="400" frameborder="0"/>
+      </div>
+    <% end %>
+  </div>
   <div class="tab-pane" id="myCapsules"></div>
   <div class="tab-pane" id="newCapsules"></div>
 </div>

@@ -4,5 +4,29 @@
 - unless current_user
   = link_to 'login', new_user_session_path
 
-- if current_user
-  = render :partial => "shared/secondary_menu"
+%ul.nav.nav-tabs.secondary-nav
+  %li
+    %a{:class => "active", :href => "#allCapsules", :"data-toggle" => "tab"}
+      = t('allCapsules')
+  - if @user_capsuls
+    %li
+      %a{:href => "#myCapsules", :"data-toggle" => "tab"}
+        = t('myCapsules')
+  %li
+    %a{:href => "#newCapsules", :"data-toggle" => "tab"}
+      = t('newCapsule')
+.tab-content
+  .tab-pane.active#allCapsules
+    - @capsuls.each do |cap|
+      .video-view
+        %h5= link_to cap.description, capsul_path(cap)
+        %iframe{:src => "http://www.dailymotion.com/embed/video/#{cap.video}", :width => "620", :height => "400", :frameborder => "0"}
+    %a{:href => "#{request.protocol}#{request.host_with_port}?limit=#{@limit}&offset=#{@offset + @limit}", :"class" => "next-infinite-loader"} Next
+  - if @user_capsuls
+    .tab-pane#myCapsules
+      - @user_capsuls.each do |cap|
+        .video-view
+          %h5= link_to cap.description, capsul_path(cap)
+          %iframe{:src => "http://www.dailymotion.com/embed/video/#{cap.video}", :width => "620", :height => "400", :frameborder => "0"}
+      %a{:href => "#{request.protocol}#{request.host_with_port}?limit=#{@limit}&offset=#{@offset + @limit}", :"class" => "next-infinite-loader"} Next
+  .tab-pane#newCapsules
