@@ -1,16 +1,5 @@
 %p#notice= notice
 
-<<<<<<< HEAD
-%p
-  %b #{t 'capsuls.description'}:
-  = @capsul.description
-%p
-  %b #{t 'capsuls.video'}:
-  = @capsul.video
-%p
-  %b #{t 'capsuls.user'}:
-  = @owner.username
-
 - if current_user and @owner.id == current_user.id
   = link_to "#{t 'capsuls_link.edit'}", edit_capsul_path(@capsul)
   \|
@@ -25,4 +14,3 @@
 - if @json_map
   .show_capsule_map_container
     = gmaps("map_options" => { "detect_location" => true, "center_on_user" => true, "zoom" => 10, "disableDefaultUI" => true, "width" => 100},"markers" => { "data" => @json_map})
->>>>>>> geo
