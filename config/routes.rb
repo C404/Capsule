@@ -4,8 +4,11 @@ Capsule::Application.routes.draw do
   match '/auth/facebook/callback', to: 'omniauth#facebook'
   match '/auth/dailymotion/callback', to: 'omniauth#dailymotion'
   get "omni_session/connect"
-  
-#  match '/:locale' => 'home#index'
+
+  # for json request
+  match '/capsuls_datas', to: 'capsuls#json_datas'
+
+  # match '/:locale' => 'home#index'
   scope '(:locale)', constraints: { locale: /en|fr/ } do
 
     # all capsuls CRUD

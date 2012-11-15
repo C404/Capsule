@@ -51,5 +51,5 @@ class JsonVideoParser
                 @jsonLoader.launch()
             )
 $("document").ready ->
-    new JsonLoader("/capsuls_range", 0, 10).attachParser(new JsonVideoParser($("#allCapsules"))).launch()
-    new JsonLoader("/capsuls_range", 0, 10, {currentUser: true}).attachParser(new JsonVideoParser($("#myCapsules"))).launch()
+    new JsonLoader("/capsuls_datas", 0, 10).attachParser(new JsonVideoParser($("#allCapsules"))).launch()
+    new JsonLoader("/capsuls_datas", 0, 10, {currentUser: true}).attachParser(new JsonVideoParser($("#myCapsules"))).launch()

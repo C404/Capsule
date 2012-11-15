@@ -12,8 +12,8 @@ class CapsulsController < ApplicationController
     end
   end
 
-  # GET /capsuls_range?from=int&limit=int&currentUser=bool
-  def range
+  # GET /capsuls_datas?from=int&limit=int&currentUser=bool
+  def json_datas
     if params[:currentUser] and current_user
       user = User.find(current_user.id)
       @capsuls = user.capsuls.order('created_at DESC').limit(params[:limit]).offset(params[:from])
