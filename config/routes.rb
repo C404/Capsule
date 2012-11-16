@@ -21,6 +21,9 @@ Capsule::Application.routes.draw do
     get "user/me"
     resources :user, :only => [:show]
 
+    # search
+    resources :search, :only => [:index]
+
     # root_path for /:locale
     root :to => 'home#index'
   end

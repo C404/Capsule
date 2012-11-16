@@ -6,3 +6,5 @@ db/schema.rb
 /test/
 db/development.sqlite3
 /db/development.sqlite3
+*~
+\#*\#

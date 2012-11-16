@@ -1,0 +1,13 @@
+en:
+  search:
+    title: "Search"
+    tag_list: "Searched tags list :"
+    desc: "Request"
+    results: "Results :"
+
+fr:
+  search:
+    title: "Recherche"
+    tag_list: "Liste des tags recherchés :"
+    desc: "Requete"
+    results: "Resultats de la recherche :"

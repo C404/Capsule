@@ -9,7 +9,7 @@ class Capsul < ActiveRecord::Base
   private
   def append_tags
     self.description.split.each do |word|
-      self.tags << Tag.find_or_create_by_tag(/^#(?<tag>\w+)/.match(word)[:tag]) if word =~ /^#(?<tag>\w+)/
+      self.tags << Tag.find_or_create_by_tag(/^#(?<tag>\w+)$/.match(word)[:tag]) if word =~ /^#(?<tag>\w+$)/
     end
   end
 end

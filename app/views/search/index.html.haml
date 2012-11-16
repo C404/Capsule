@@ -1,0 +1,18 @@
+%h3= t 'search.title'
+
+- if @taglist
+  %span= t 'search.tag_list'
+  %ul
+    - @taglist.each do |tag|
+      %li= tag
+- else
+  %span= "#{t('search.desc')} : #{params[:search]}"
+
+%div 
+  %span= t 'search.results'
+  %ul
+    - @result.each do |capsul|
+      %li
+        %span= capsul.description
+        = link_to "#{t 'capsuls_link.show'}", capsul
+

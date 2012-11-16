@@ -28,11 +28,11 @@
       </li>
       <% end %>
     </ul>
-    <form class="form-search navbar-form pull-right">
+    <%= form_tag "/#{locale}/search", :method => 'get', :class => "form-search navbar-form pull-right" do -%>
       <div class="input-append">
-	<input type="text" class="span2 search-query">
-	<button type="submit" class="btn"><%=t 'user_panel.search' %></button>
+        <%= text_field_tag :search, params[:search], :class => "span2 search-query" %>
+        <%= submit_tag t('user_panel.search'), :name => nil, :class => "btn" %>
       </div>
-    </form>
+    <% end -%>
   </div>
 </div>
