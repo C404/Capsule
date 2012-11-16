@@ -4,6 +4,7 @@ en:
     tag_list: "Searched tags list :"
     desc: "Request"
     results: "Results :"
+    no_result: "No results found"
 
 fr:
   search:
@@ -11,3 +12,4 @@ fr:
     tag_list: "Liste des tags recherchés :"
     desc: "Requete"
     results: "Resultats de la recherche :"
+    no_result: "Pas de resultats trouvés"

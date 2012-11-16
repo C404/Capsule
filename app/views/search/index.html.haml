@@ -9,10 +9,13 @@
   %span= "#{t('search.desc')} : #{params[:search]}"
 
 %div 
-  %span= t 'search.results'
-  %ul
-    - @result.each do |capsul|
-      %li
-        %span= capsul.description
-        = link_to "#{t 'capsuls_link.show'}", capsul
+  - if @result.size > 0
+    %span= t('search.results')
+    %ul
+      - @result.each do |capsul|
+        %li
+          %span= capsul.description
+          = link_to "#{t 'capsuls_link.show'}", capsul
+  - else
+    %span= t 'search.no_result'
 
