@@ -1,6 +1,8 @@
 /log/
 /tmp/
 /.sass-cache/
+db/schema.rb
 /db/schema.rb
 /test/
+db/development.sqlite3
 /db/development.sqlite3
