@@ -1,0 +1,12 @@
+#! /usr/bin/env ruby
+
+Dir.glob "./**/*.html.erb" do |erb|
+  haml = erb.gsub(".html.erb", ".html.haml")
+  puts "Executing : `bundle exec html2haml #{erb} #{haml}`"
+  `bundle exec html2haml #{erb} #{haml}`
+  if File.exists? haml
+    puts "Conversion seems to have worked, deleting erb file"
+    `rm #{erb}`
+  end
+end
+

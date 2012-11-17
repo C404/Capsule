@@ -1,0 +1,3 @@
+#! /bin/sh
+
+rake db:drop --trace && rake db:seed --trace

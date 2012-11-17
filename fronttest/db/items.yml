@@ -1,0 +1,126 @@
+system:
+  _desc: System stuffs, nothing interesting there (really!)
+room:
+  _desc: Doors, room lights, acccess, etc.
+doodad:
+  _desc: Things, stuff, decoration, etc.
+structure:
+  _desc: Bridges, totems, etc.
+electricity: 
+  _desc: AC plug, PC16, PC32, etc.
+cable:
+  _desc: Everything related to cable
+  ethernet:
+  video:
+    vga
+    dvi
+    dvii
+    hdmi
+    svideo
+    yuv
+  light:
+    dmx3: 
+    dmx4: 
+    dmx5: 
+    splitter:
+    ends:
+  sound:
+    xlr:
+    rca:
+    jack:
+    digital:
+    speakon:
+    adapter:
+  electricity:
+    multiplug:
+    pc16:
+    p17-16mono:
+    p17-16tri:
+    p17-32mono:
+    p17-32tri:
+    p17-63tri:
+    p17-125tri:
+    adapter:
+light:
+  _desc: Lighting equipment
+  dmx:
+    splitter:
+    wifi:
+  traditional:
+    gel:
+    decoupe:
+    pc:
+      _desc: Plan convexe
+    par:
+    poursuite:
+    low_power
+    ambiant_outdoor:
+    ambiant_indoor:
+    video:
+    acl:
+      _desc: Air Craft Landind
+    deco:
+    fluo:
+    fresnel:
+  moving:
+    lyre:
+      spot:
+      wash:
+    miroir:
+    ambiance:
+    blinder:
+  special_fx:
+    fog:
+    smoke:
+    vent:
+    strob:
+    blacklight:
+    mirorball:
+    consommables:
+  led:
+    lyre:
+    par:
+    decoupe:
+    ramp:
+    panels:
+    others
+  controller:
+    asservis:
+    6:
+    12:
+    24:
+    48:
+  bloc_puissance:
+    
+sound:
+  _desc: Sound equipment
+  # amps:
+  #   _desc: Bring the force into your speakers
+  # speakers:
+  #   _desc: Transform electrical signals into psychedelic waves
+  #   _attributes:
+  #     - rms_power
+  #     - freq_min
+  #     - freq_max
+  #   _rms_power:
+  #     type: int
+  #     min: 1
+  #     max: 0
+  #     unit: Watt
+  #   _freq_min:
+  #     type: int
+  #     min: 1
+  #     max: 22000
+  #     unit: Herz
+  #   _freq_max:
+  #     type: int
+  #     min: 1
+  #     max: 22000
+  #     unit: Herz
+  #   data:
+  #     - name: Speaker 1
+  #       desc: So Power Full speaker
+  #       freq_min: 20
+  #       freq_max: 40
+
+
