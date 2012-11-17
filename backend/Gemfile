@@ -1,0 +1,65 @@
+source 'https://rubygems.org'
+
+# THE framework
+gem 'rails', '3.2.8'
+
+# MongoDB ODM
+gem 'mongoid', "~> 3.0.0"
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'bootstrap-sass'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'therubyracer', :platforms => :ruby
+  gem 'uglifier', '>= 1.0.3'
+end
+
+gem 'jquery-rails'
+gem 'haml-rails'
+
+# Api Builder 
+gem 'kaminari'
+gem 'rocket_pants', git: 'git://github.com/elthariel/rocket_pants.git', branch: 'handle_mongoid_exceptions'
+
+# Rails Admin
+gem 'rails_admin'
+
+# Authentication and ACL (also required for rails_admin)
+gem 'devise'
+gem 'cancan'
+
+## Gems required only for development stations
+group :development do
+  # To use debugger
+  if RUBY_VERSION =~ /1.9/ 
+    gem 'ruby-debug19'
+  else
+    gem 'ruby-debug'
+  end
+
+  # for kill_erb script
+  gem 'hpricot'
+  gem 'ruby_parser'
+
+  # for Mongo dump, restore, and hacking
+  gem 'bson_ext'
+  gem 'yajl-ruby' # not entirely sure this is usefull :-/
+end
+
+# Used for seeds
+gem "factory_girl_rails", "~> 4.0"
+gem 'faker'
+
+# Test framework
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+  gem 'mongoid-rspec'
+  gem 'database_cleaner'
+end
+
+gem 'apipie-rails'
+gem 'redcarpet'
+gem 'rest-client'
+gem 'oauth'
