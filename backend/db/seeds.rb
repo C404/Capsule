@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+1000.times do |i|
+  content = Faker::Lorem.paragraph(1).split(' ').map{|w| rand(3)==0 ? "##{w}": w }.join(' ')
+
+  puts "Adding fake capsule #{i}"
+  puts "\t -> #{content}"
+  Capsule.create!(content: content)
+end
+
