@@ -2,21 +2,20 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-api = '/api/1'                
+api = '/1'
 
-angular.module('events', ['ngResource']).factory 'Events', ($resource) ->
-  Events = $resource('/api/1/hire/events/:id')
-  Events.update = (cb) ->
-    return Events.update({id: this._id.$oid}, angular.extend({}, this, {_id:undefined}), cb)
-  Events.destroy = (cb) ->
-    return Events.remove({id: this._id.$oid}, cb)
-  Events.newEvent = (cb) ->
-    return $resource('/api/1/hire/events/new').get()
-  Events.getContainers = (cb) ->
-    return $resource('/api/1/hire/events/containers/:id').get()
-  return Events
+angular.module('capsules', ['ngResource']).factory 'Capsules', ($resource) ->
+  Capsules = $resource(api + '/capsules')
+  return Capsules
 
-angular.module('Capsule', ['ui', 'ui.directives', 'events']).config ($routeProvider) =>
+angular.module('sessions', ['ngResource']).factory 'Sessions', ($resource) ->
+  Sessions = $resource(api + '/sessions')
+  Sessions.token = null
+  Sessions.login = (user, Sessions) ->
+    Sessions.token = $resource(api + '/sessions').get()
+  return Sessions
+
+angular.module('Capsule', ['ui', 'ui.directives', 'capsules', 'sessions']).config ($routeProvider) =>
   $routeProvider.when '/', {templateUrl:'/'}
   $routeProvider.when '/capsule', {controller:CapsuleCtrl, templateUrl:'/ng/capsule'}
   $routeProvider.otherwise {redirectTo:'/'}
