@@ -28,7 +28,7 @@ class Capsule
   index location: "2d"
   index hashtags: 1
 
-  before_save do 
+  before_save do
     self.hashtags = self.content.scan /#\w+/
   end
 end

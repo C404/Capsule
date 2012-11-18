@@ -34,6 +34,7 @@ class CapsulesController < ApiController
   end
 
   api :GET, '/capsules/search/:search_query', 'Search for great capsules'
+  param :search_query, Session, desc: "A list of comma separated hashtags to search for (without the #)"
   def search
     error! :bad_request unless params[:search_query]
     tags = params[:search_query].split(',').map { |s| "##{s}"}
@@ -54,8 +55,11 @@ class CapsulesController < ApiController
 
   api :POST, '/users/:user_id/capsules', 'Create a new capsule'
   def create
-    load_user!
-    @user.capsules.create!(params[:capsule])
+    # load_user!
+    # @user.capsules.create!(params[:capsule])
+    capsule = Capsule.new(params[:capsule])
+    capsule.video = params[:file]
+    capsule.save!
   end
 
   api :PUT, '/capsules/:id', 'Update a capsule information'
