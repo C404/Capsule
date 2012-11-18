@@ -73,3 +73,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 # Support CORS
 gem 'rack-cors', :require => 'rack/cors'
+
+# Replace delayed_job
+gem 'sidekiq'
+

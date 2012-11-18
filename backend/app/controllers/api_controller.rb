@@ -26,6 +26,8 @@ class ApiController < RocketPants::Base
   end
 
   def belongs_to_user! o
+    logger.info o.inspect
+    logger.info @current_user.inspect
     error! :unauthenticated if o.user_id != @current_user.id
   end
 

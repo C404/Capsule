@@ -31,7 +31,7 @@ class UsersController < ApiController
 
   api :GET, '/users/:id', "Retrieve info about a user"
   def show
-    expose User.find_by_id params[:user_id]
+    expose User.find params[:id]
   end
 
   ##################################
