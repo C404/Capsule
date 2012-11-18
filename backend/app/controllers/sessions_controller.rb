@@ -30,9 +30,10 @@ class SessionsController < ApiController
   def create
     u = User.where(username: params[:username], password: params[:password]).first
     error! :unauthenticated if u.nil?
-    if u.sessions.first.nil?
+    logger.info u.inspect
+    if (@session = u.sessions.first).nil?
       @session = u.sessions.create
-      @session.update_attribute :token, Digest::SHA1.hexdigest  + "#{@session.id}_#{u.id}_capsule_token"
+      @session.update_attribute :token, Digest::SHA1.hexdigest("#{@session.id}_#{u.id}_capsule_token")
     end
     expose @session
   end

@@ -47,10 +47,9 @@ class UsersController < ApiController
   param :password, String, desc: "Password", required: true
   api :POST, '/users', 'Create a user account'
   def create
-    logger.info 'wtf'
-    @user = User.create() #params[:user])
-    @user.update_attributes username: Digest::SHA1.hexdigest  + "#{@user.id}_capsule_password",
-    password: Digest::SHA1.hexdigest  + "#{@user.id}_capsule_password"
+    @user = User.create
+    @user.update_attributes username: Digest::SHA1.hexdigest("#{@user.id}_capsule_username"),
+    password: Digest::SHA1.hexdigest("#{@user.id}_capsule_password")
     expose @user
   end
 
