@@ -16,8 +16,8 @@
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
     %link(href="images/favicon.ico" rel="shortcut icon")
 
-  %body
-    .navbar
+  %body{"ng-app" => "Capsule"}
+    .navbar{"ng-controller" => "UsersCtrl"}
       .navbar-inner
         .container-fluid
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
@@ -29,11 +29,12 @@
               %li= link_to "Users", "#/users"
               %li= link_to "User Page (test)", "#/user"
               %li= link_to "Profil", "#/profil"
-              %li= link_to "Sign Up", "#/newuser"
-              %li= link_to "Sign In", "#/session"
+              %li{"ng-hide" => "isLogged()"}= link_to "Sign Up", "#/newuser"
+              %li{"ng-hide" => "isLogged()"}= link_to "Sign In", "#/session"
+              %li{"ng-show" => "isLogged()", "ng-click" => "logout()"}= link_to "LogOut", "#/"
 
 
-    .container-fluid{"ng-app" => "Capsule"}
+    .container-fluid
       %div{"ng-view" => true}
     /
       Javascripts

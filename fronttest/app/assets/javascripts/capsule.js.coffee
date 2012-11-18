@@ -1,5 +1,5 @@
 
 window.CapsuleCtrl = ($scope, Capsules, Sessions) ->
-  $scope.capsules = Capsules.get((data) ->
+  $scope.capsules = Capsules.getCapsules((data) ->
     console.log(data.response))
   

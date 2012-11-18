@@ -21,6 +21,7 @@ class CapsulesController < ApiController
     formats ['json']
   end
 
+  skip_before_filter :auth_current_user
   api :GET, '/users/:user_id/capsules', 'Get a user\'s published capsules'
   api :GET, '/capsules', 'Get recent/featured capsules'
   def index
