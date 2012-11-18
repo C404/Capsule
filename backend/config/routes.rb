@@ -2,6 +2,7 @@ require Rails.root.join('app','constraints', 'supported_services_constraint.rb')
 
 CapsuleBackend::Application.routes.draw do
   api version: 1 do
+    delete '/sessions' => 'sessions#destroy'
     resources :sessions, only: [:create, :destroy]
 
     resources :users, except: [:edit] do

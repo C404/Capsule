@@ -36,8 +36,7 @@ angular.module('sessions', ['ngResource']).factory 'Sessions', ($resource) ->
     $resource(api + '/sessions').save(user, callback)
       
   Sessions.logout = () ->
-    $resource(api + '/sessions/' + Sessions.token).remove(() ->
-      $location.path('capsule'))
+    $resource(api + '/sessions?token=' + Sessions.token).remove()
     Sessions.token = null
     window.eraseCookie('capsuleauthtoken')
     window.eraseCookie('capsuleuserid')

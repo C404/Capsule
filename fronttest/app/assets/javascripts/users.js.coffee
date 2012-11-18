@@ -6,7 +6,6 @@ window.UsersCtrl = ($scope, $location, Users, Sessions) ->
     Sessions.token = null
     $scope.currentUser = null
 
-  console.log($scope.currentUser)
   $scope.isLogged = () ->
     if Sessions.token == null
       return false
