@@ -2,20 +2,31 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-api = '/1'
+api = 'http://127.0.0.1/1'
 
 angular.module('capsules', ['ngResource']).factory 'Capsules', ($resource) ->
-  Capsules = $resource('http://10.0.0.8' + api + '/capsules')
+  Capsules = $resource(api + '/capsules')
   return Capsules
+
+angular.module('users', ['ngResource']).factory 'Users', ($resource) ->
+  Users = $resource(api + '/users')
+  Users.getNewUser = () ->
+    return $resource(api + '/users/new').get()
+  return Users
 
 angular.module('sessions', ['ngResource']).factory 'Sessions', ($resource) ->
   Sessions = $resource(api + '/sessions')
   Sessions.token = null
-  Sessions.login = (user, Sessions) ->
+  Sessions.login = (user) ->
     Sessions.token = $resource(api + '/sessions').get()
   return Sessions
 
-angular.module('Capsule', ['ui', 'ui.directives', 'capsules', 'sessions']).config ($routeProvider) =>
+angular.module('Capsule', ['ui', 'ui.directives', 'capsules', 'sessions', 'users']).config ($routeProvider) =>
   $routeProvider.when '/', {templateUrl:'/'}
   $routeProvider.when '/capsule', {controller:CapsuleCtrl, templateUrl:'/ng/capsule'}
+  $routeProvider.when '/users', {controller:UsersCtrl, templateUrl:'/ng/users'}
+  $routeProvider.when '/user', {controller:UsersCtrl, templateUrl:'/ng/user'}
+  $routeProvider.when '/profil', {controller:ProfilCtrl, templateUrl:'/ng/profil'}
+  $routeProvider.when '/newuser', {controller:UsersCtrl, templateUrl:'/ng/newuser'}
+  $routeProvider.when '/session', {controller:UsersCtrl, templateUrl:'/ng/session'}
   $routeProvider.otherwise {redirectTo:'/'}
