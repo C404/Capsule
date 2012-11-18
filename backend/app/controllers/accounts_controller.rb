@@ -35,9 +35,7 @@ class AccountsController < ApiController
 #    redirect_to root_url + "/auth/#{params[:service]}?capsulecallback=helloworld"
     
     if params[:service] == 'facebook'
-      @oauth = Koala::Facebook::OAuth.new(SERVICES_SETTINGS[:facebook][:id],
-                                          SERVICES_SETTINGS[:facebook][:secret],
-                                          auth_callback_url('facebook', 'http://www.lol.com'))
+      init_fb ERB::Util::url_encode(params[:callback])
       redirect_to @oauth.url_for_oauth_code(:permissions => SERVICES_SETTINGS[:facebook][:permissions])
     end
     
@@ -45,9 +43,21 @@ class AccountsController < ApiController
 
   def auth_callback
     if params[:service] == 'facebook'
-      @oauth.get_access_token_info(code) 
+      init_fb params[:auth_callback_param]
+      #
+      @oauth.get_access_token_info(params[:code])
+      redirect_to CGI::unescape params[:auth_callback_param]
     end
   end
 
+  private
+  def init_fb url_ret
+      @oauth = Koala::Facebook::OAuth.new(SERVICES_SETTINGS[:facebook][:id],
+                                        SERVICES_SETTINGS[:facebook][:secret],
+                                        auth_callback_url('facebook', url_ret))
+  
+    logger.info auth_callback_url('facebook', url_ret)
+  end
+  
 end
 
