@@ -7,7 +7,7 @@ api = 'http://127.0.0.1/1'
 angular.module('capsules', ['ngResource']).factory 'Capsules', ($resource) ->
   Capsules = $resource(api + '/capsules')
   Capsules.getCapsules = (pageNum = 0, callback) ->
-    res = $resource(api + '/capsules/?page=#{pageNum}').get( (res) => callback?(res))
+    res = $resource(api + "/capsules/?page=#{pageNum}").get( (res) => callback?(res))
   Capsules
 .directive("whenScrolled", ->
     (scope, elm, attr) ->
@@ -22,8 +22,7 @@ angular.module('users', ['ngResource']).factory 'Users', ($resource) ->
 
   Users = $resource(api + '/users/:id')
   Users.getUser = (id) ->
-    return $resource(api + '/users/' + id).get((data) ->
-      console.log(data))
+    return $resource(api + '/users/' + id).get()
 
   Users.getNewUser = () ->
     return $resource(api + '/users/new').get()

@@ -29,7 +29,7 @@ class CapsulesController < ApiController
       expose 'unimplemented'
       #expose User.capsules.order('created_at ASC').page(params[:page])
     else
-      expose Capsule.asc(:created_at).page(params[:page])
+      expose Capsule.asc(:created_at).page(params[:page]).per(5)
     end
   end
 
