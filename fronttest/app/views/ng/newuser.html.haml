@@ -1,0 +1,19 @@
+%div{"ng-controller" => "UsersCtrl"}
+  %h1.well Sign Up
+  .well
+    %label
+      Id
+    %input{"type" => "text", "ng-model" => "newUser.response._id"}
+    %label
+      Username
+    %input{"type" => "text", "ng-model" => "newUser.response.username"}
+    %label
+      Password
+    %input{"type" => "text", "ng-model" => "newUser.response.password"}
+    %label
+      Confirm
+    %input{"type" => "text", "ng-model" => "newUser.response.passwordConfirm"}
+    %br
+    %button{"ng-click" => "saveNewUser()"}
+      Register
+    
