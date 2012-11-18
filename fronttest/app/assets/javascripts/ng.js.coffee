@@ -5,18 +5,23 @@
 api = 'http://127.0.0.1/1'
 
 angular.module('capsules', ['ngResource']).factory 'Capsules', ($resource) ->
-
   Capsules = $resource(api + '/capsules')
-  
-  Capsules.getCapsules = (callback) ->
-    $resource(api + '/capsules/').get()
-    
-  return Capsules
+  Capsules.getCapsules = (pageNum = 0, callback) ->
+    res = $resource(api + '/capsules/?page=#{pageNum}').get( (res) => callback?(res))
+  Capsules
+.directive("whenScrolled", ->
+    (scope, elm, attr) ->
+        raw = elm[0];
+        $(window).scroll( (e) ->
+            if $(document).scrollTop() + $(window).height() >= $(document).height()
+                scope.$apply(attr.whenScrolled)
+        )
+    )
 
 angular.module('users', ['ngResource']).factory 'Users', ($resource) ->
 
   Users = $resource(api + '/users')
-  
+
   Users.getNewUser = () ->
     return $resource(api + '/users/new').get()
   return Users
