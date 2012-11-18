@@ -23,6 +23,7 @@ window.UsersCtrl = ($scope, $location, Users, Sessions) ->
         Sessions.token = data.response.token
         window.createCookie('capsuleauthtoken', data.response.token, 1)
         window.createCookie('capsuleuserid', data.response.user_id, 1)
+        $scope.currentUser = Users.getUser(data.response.user_id)
         $location.path('capsule')
 
     Sessions.login($scope.newUser.response, callback)

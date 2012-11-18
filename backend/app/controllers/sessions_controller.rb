@@ -44,6 +44,6 @@ class SessionsController < ApiController
     @session = Session.where(token: params[:token]).first
     belongs_to_user! @session
     @session.delete
-    expose :ok 
+    expose :ok
   end
 end
