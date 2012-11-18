@@ -27,7 +27,6 @@
             %ul.nav
               %li= link_to "Capsule", "#/capsule"
               %li= link_to "Users", "#/users"
-              %li= link_to "User Page (test)", "#/user"
               %li{"ng-hide" => "isLogged()"}= link_to "Sign Up", "#/newuser"
               %li{"ng-hide" => "isLogged()"}= link_to "Sign In", "#/session"
               %li{"ng-show" => "isLogged()"}= link_to "Profil ({{currentUser.response.username}})", "#/profil"
