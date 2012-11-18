@@ -12,7 +12,6 @@
 
 class SupportedServicesConstraint
   def self.matches?(request)
-    supported_services = ['facebook', 'twitter', 'dailymotion', 'youtube']
-    supported_services.include?(request.path_parameters[:service])
+    (SERVICES_SETTINGS.map { |k,v| k.to_s }).include?(request.path_parameters[:service])
   end
 end

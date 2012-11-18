@@ -31,4 +31,12 @@ CapsuleBackend::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  ::SERVICES_SETTINGS = {
+    facebook: { id: '138038139669724', secret: '65e4acabaa1e551adb7b8908f18792b7', permissions: 'publish_stream' },
+    twitter: true,
+    dailymoition: true,
+    youtube: true
+  }
+  
 end
