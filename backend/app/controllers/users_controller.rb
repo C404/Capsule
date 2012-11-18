@@ -21,12 +21,17 @@ class UsersController < ApiController
     formats ['json']
   end
 
+
+  skip_before_filter :authorize, :only => [:index, :show, :new, :create]
+
   api :GET, '/users/', "List registered users"
   def index
+    expose User.all 
   end
 
   api :GET, '/users/:id', "Retrieve info about a user"
   def show
+    expose User.find_by_id params[:user_id]
   end
 
   ##################################
@@ -34,18 +39,30 @@ class UsersController < ApiController
 
   api :GET, '/users/new', 'Get a prototype for user users, as well as a captcha :p'
   def new
+    @user = User.new
+    expose @user
   end
 
+  param :username, String, desc: "Username", required: true
+  param :password, String, desc: "Password", required: true
   api :POST, '/users', 'Create a user account'
   def create
+    logger.info 'wtf'
+    @user = User.create() #params[:user])
+    @user.update_attributes username: Digest::SHA1.hexdigest  + "#{@user.id}_capsule_password",
+    password: Digest::SHA1.hexdigest  + "#{@user.id}_capsule_password"
+    expose @user
   end
+
 
   api :PUT, '/users/:id', 'Update an user account details'
   def update
+    @current_user.update_attribute(params['user'])
   end
 
   api :DELETE, '/users/:id', 'Leaving that soon ?'
   def destroy
+    @current_user.delete
   end
 
 end

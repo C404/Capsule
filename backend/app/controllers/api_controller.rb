@@ -12,4 +12,21 @@
 
 class ApiController < RocketPants::Base
   extend Apipie::DSL
+  before_filter :auth_current_user
+  #jsonp
+
+
+  protected
+  attr_accessor :current_user
+
+  def auth_current_user
+    session = Session.where(token: params[:token]).first
+    error! :unauthenticated if session.nil?
+    @current_user = session.user
+  end
+
+  def belongs_to_user! o
+    error! :unauthenticated if o.user_id != @current_user.id
+  end
+
 end

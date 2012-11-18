@@ -21,11 +21,28 @@ class SessionsController < ApiController
     formats ['json']
   end
 
-  api :POST, '/sessions', 'Get a session id'
+  
+  skip_before_filter :authorize, :only => [:create]
+  api :POST, '/sessions', 'Get a session token'
+  param :username, String, desc: "Username", required: true
+  param :password, String, desc: "Username", required: true
+  
   def create
+    u = User.where(username: params[:username], password: params[:password]).first
+    error! :unauthenticated if u.nil?
+    if u.sessions.first.nil?
+      @session = u.sessions.create
+      @session.update_attribute :token, Digest::SHA1.hexdigest  + "#{@session.id}_#{u.id}_capsule_token"
+    end
+    expose @session
   end
 
   api :DELETE, '/sessions/:id', 'Destroy a session id / disconnects'
-  def destroy 
+  param :token, String, desc: "Session token", required: true
+  def destroy
+    @session = Session.where(token: params[:token]).first
+    belongs_to_user! @session
+    @session.delete
+    expose :ok 
   end
 end
