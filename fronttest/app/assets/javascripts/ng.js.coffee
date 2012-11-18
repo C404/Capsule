@@ -48,12 +48,10 @@ angular.module('sessions', ['ngResource']).factory 'Sessions', ($resource) ->
   return Sessions
 
 angular.module('Capsule', ['ui', 'ui.directives', 'capsules', 'sessions', 'users']).config ($routeProvider) =>
-
-  $routeProvider.when '/', {templateUrl:'/'}
   $routeProvider.when '/capsule', {controller:CapsuleCtrl, templateUrl:'/ng/capsule'}
   $routeProvider.when '/users', {controller:UsersCtrl, templateUrl:'/ng/users'}
   $routeProvider.when '/user', {controller:UsersCtrl, templateUrl:'/ng/user'}
   $routeProvider.when '/profil', {controller:ProfilCtrl, templateUrl:'/ng/profil'}
   $routeProvider.when '/newuser', {controller:UsersCtrl, templateUrl:'/ng/newuser'}
   $routeProvider.when '/session', {controller:UsersCtrl, templateUrl:'/ng/session'}
-  $routeProvider.otherwise {redirectTo:'/'}
+  $routeProvider.otherwise {redirectTo:'/capsule'}
