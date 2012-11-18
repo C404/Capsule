@@ -13,7 +13,7 @@ CapsuleBackend::Application.routes.draw do
       resources :accounts, except: [:edit, :show]
     end
     
-    resources :capsules, only: [:index, :show, :destroy, :update]
+    resources :capsules, only: [:index, :show, :destroy, :update, :create]
     get '/capsules/search/:search_query' => 'capsules#search'
     
   end

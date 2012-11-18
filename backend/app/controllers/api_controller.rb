@@ -12,7 +12,7 @@
 
 class ApiController < RocketPants::Base
   extend Apipie::DSL
-  before_filter :auth_current_user
+  #before_filter :auth_current_user
   #jsonp
 
 
@@ -25,7 +25,7 @@ class ApiController < RocketPants::Base
     @current_user = session.user
   end
 
-  def belongs_to_user! o
+  def belongs_to_user!
     error! :unauthenticated if o.user_id != @current_user.id
   end
 
