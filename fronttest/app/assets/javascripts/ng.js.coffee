@@ -7,7 +7,7 @@ api = 'http://127.0.0.1/1'
 angular.module('capsules', ['ngResource']).factory 'Capsules', ($resource) ->
   Capsules = $resource(api + '/capsules')
   Capsules.getCapsules = (pageNum = 0, callback) ->
-    res = $resource(api + '/capsules/?page=#{pageNum}').get( (res) => callback?(res))
+    res = $resource(api + "/capsules/?page=#{pageNum}").get( (res) => callback?(res))
   Capsules
 .directive("whenScrolled", ->
     (scope, elm, attr) ->
