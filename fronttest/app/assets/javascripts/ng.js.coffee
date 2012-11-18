@@ -18,7 +18,10 @@ angular.module('sessions', ['ngResource']).factory 'Sessions', ($resource) ->
   Sessions = $resource(api + '/sessions')
   Sessions.token = null
   Sessions.login = (user) ->
-    Sessions.token = $resource(api + '/sessions').get()
+    delete user.passwordConfirm
+    delete user._id
+    Sessions.token = $resource(api + '/sessions').save(user, (data) ->
+      console.log(data))
   return Sessions
 
 angular.module('Capsule', ['ui', 'ui.directives', 'capsules', 'sessions', 'users']).config ($routeProvider) =>

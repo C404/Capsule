@@ -22,7 +22,7 @@ class SessionsController < ApiController
   end
 
   
-  skip_before_filter :authorize, :only => [:create]
+  skip_before_filter :auth_current_user, :only => [:create]
   api :POST, '/sessions', 'Get a session token'
   param :username, String, desc: "Username", required: true
   param :password, String, desc: "Username", required: true

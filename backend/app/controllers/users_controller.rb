@@ -22,7 +22,7 @@ class UsersController < ApiController
   end
 
 
-  skip_before_filter :authorize, :only => [:index, :show, :new, :create]
+  skip_before_filter :auth_current_user, :only => [:index, :show, :new, :create]
 
   api :GET, '/users/', "List registered users"
   def index
