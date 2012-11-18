@@ -63,3 +63,10 @@ gem 'apipie-rails'
 gem 'redcarpet'
 gem 'rest-client'
 gem 'oauth'
+
+# Handling file upload
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+
+# Support CORS
+gem 'rack-cors', :require => 'rack/cors'

@@ -5,7 +5,7 @@
 api = '/1'
 
 angular.module('capsules', ['ngResource']).factory 'Capsules', ($resource) ->
-  Capsules = $resource(api + '/capsules')
+  Capsules = $resource('http://10.0.0.8' + api + '/capsules')
   return Capsules
 
 angular.module('sessions', ['ngResource']).factory 'Sessions', ($resource) ->
