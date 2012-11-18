@@ -3,9 +3,13 @@
   .well
     Search
     %input{"type" => "test"}
-  %ul.thumbnails
-    %li
-      .well{"ng-repeat" => "capsule in items", "style" => "float:left;width:450px;margin:20px"}
-        {{capsule.content}}
-        %iframe{"frameborder" => "0", "width" => "480", "height" => "360", "src" => "http://www.dailymotion.com/embed/video/xrl8lu"}
+  %ul.media-list
+    %li.media{"ng-repeat" => "capsule in items"}
+      %button.pull-left{"data-toggle" => "collapse", "data-target" => "#frame"+"{{capsule._id}}"}
+        %img.media-object{"src" => "http://placehold.it/64x64"}
+      .well.media-body
+        %h4.media-heading {{capsule.content}}
+        .media
+          .collapse.out{"id" => "frame"+"{{capsule._id}}"}
+            %iframe{"frameborder" => "0", "width" => "480", "height" => "360", "src" => "http://www.dailymotion.com/embed/video/xrl8lu"}
 

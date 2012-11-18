@@ -22,8 +22,7 @@ angular.module('users', ['ngResource']).factory 'Users', ($resource) ->
 
   Users = $resource(api + '/users/:id')
   Users.getUser = (id) ->
-    return $resource(api + '/users/' + id).get((data) ->
-      console.log(data))
+    return $resource(api + '/users/' + id).get()
 
   Users.getNewUser = () ->
     return $resource(api + '/users/new').get()
