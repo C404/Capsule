@@ -15,8 +15,12 @@ angular.module('capsules', ['ngResource']).factory 'Capsules', ($resource) ->
 
 angular.module('users', ['ngResource']).factory 'Users', ($resource) ->
 
-  Users = $resource(api + '/users')
-  
+  Users = $resource(api + '/users/:id')
+
+  Users.getUser = (id) ->
+    return $resource(api + '/users/' + id).get((data) ->
+      console.log(data))
+
   Users.getNewUser = () ->
     return $resource(api + '/users/new').get()
   return Users
@@ -26,19 +30,18 @@ angular.module('sessions', ['ngResource']).factory 'Sessions', ($resource) ->
   Sessions = $resource(api + '/sessions')
   Sessions.token = null
   
-  Sessions.login = (user) ->
+  Sessions.login = (user, callback) ->
     delete user.passwordConfirm
     delete user._id
-    $resource(api + '/sessions').save(user, (data) ->
-      if (data.error == "unauthenticated")
-        console.log("Error login")
-      else
-        Sessions.token = data.response.token
-      console.log(data))
+    $resource(api + '/sessions').save(user, callback)
       
   Sessions.logout = () ->
-    $resource(api + '/sessions/' + Session.token.response.token).remove()
-    Session.token = null
+    $resource(api + '/sessions/' + Sessions.token).remove(() ->
+      $location.path('capsule'))
+    Sessions.token = null
+    window.eraseCookie('capsuleauthtoken')
+    window.eraseCookie('capsuleuserid')
+
   return Sessions
 
 angular.module('Capsule', ['ui', 'ui.directives', 'capsules', 'sessions', 'users']).config ($routeProvider) =>
