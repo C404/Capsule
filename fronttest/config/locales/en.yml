@@ -1,0 +1,11 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  event:
+    states:
+      loading_from_stock: Loading from stock
+      unloading_to_stage: Unloading to stage
+      loading_from_stage: Loading from stage
+      unloading_to_stock: Unloading to stock
+      final: Finished
