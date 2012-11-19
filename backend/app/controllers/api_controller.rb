@@ -12,9 +12,8 @@
 
 class ApiController < RocketPants::Base
   extend Apipie::DSL
-  before_filter :auth_current_user
-  #jsonp
-
+  # before_filter :auth_current_user
+  
 
   protected
   attr_accessor :current_user
