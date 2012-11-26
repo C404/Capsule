@@ -21,15 +21,26 @@ class VideoWatermark
 
   include Sidekiq::Worker
 
-  def perform(path, logo)
-    tmp_path = File.basename(path, File.basename(path))
-    tmp_path = "#{File.dirname path}/#{tmp_path}_watermark-tmp#{File.extname path}"
-    puts `ls -la #{tmp_path}`
+  def perform(capsule_id, logo)
+    capsule = Capsule.find(capsule_id)
+    logger.info "Watermarking #{capsule.video.watermark.path} ..."
+    path = capsule.video.watermark.path
+    tmp_path = path.gsub(/.webm$/, '')
     File.rename path, tmp_path
-    puts "avconv –i #{tmp_path} -vf \"movie=#{logo} [watermark]; [in][watermark] overlay=main_w-overlay_w-10:main_h-overlay_h-10 [out]\" #{path} 2>&1"
-    res = `avconv –i #{tmp_path} -vf "movie=#{logo} [watermark]; [in][watermark] overlay=main_w-overlay_w-10:main_h-overlay_h-10 [out]" #{path} 2>&1`
-    File.unlink tmp_path
-    puts res
-    VideoWatermark.logger.info res
+
+    command = "avconv -y -i #{tmp_path} -vf \"movie=#{logo} [watermark]; [in][watermark] overlay=0:0, format=yuv420p [out]\" #{path} 2>&1"
+
+    VideoWatermark.logger.debug command
+
+    res = `#{command}`
+    if $?.success?
+      File.unlink tmp_path
+      capsule.watermarked = true
+      capsule.save!
+    else
+      File.rename tmp_path, path
+    end
+
+    VideoWatermark.logger.debug res
   end
 end

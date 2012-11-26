@@ -41,7 +41,18 @@ class CapsuleUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :scale => [50, 50]
   # end
-  version :original do
+  # version :original do
+  # end
+  version :watermark do
+    process :apply_watermark!
+
+    def full_filename(for_path)
+      "watermarked__#{for_path}.webm"
+    end
+  end
+
+  def apply_watermark!
+    VideoWatermark.perform_async(model.id, Rails.root.join('app', 'assets', 'images', 'watermark.png').to_s)
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

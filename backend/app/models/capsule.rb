@@ -24,6 +24,7 @@ class Capsule
   # CarrierWave
   field :video, type: String
   mount_uploader :video, CapsuleUploader
+  field :watermarked, type: Boolean, default: false
 
   index location: "2d"
   index hashtags: 1
