@@ -22,16 +22,19 @@ class VideoWatermark
   include Sidekiq::Worker
 
   def perform(capsule_id, logo)
+    # We fetch and compute all the necessary data.
     capsule = Capsule.find(capsule_id)
     logger.info "Watermarking #{capsule.video.watermark.path} ..."
     path = capsule.video.watermark.path
     tmp_path = path.gsub(/.webm$/, '')
     File.rename path, tmp_path
 
+    # Here we build the command we want to execute, notice that the right avconv version must be in PATH
     command = "avconv -y -i #{tmp_path} -vf \"movie=#{logo} [watermark]; [in][watermark] overlay=0:0, format=yuv420p [out]\" #{path} 2>&1"
 
     VideoWatermark.logger.debug command
 
+    # Here we call avconv and check for the result !
     res = `#{command}`
     if $?.success?
       File.unlink tmp_path
