@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Capsule</string>
+    <string name="display">Affichage</string>
+    <string name="tap_to_stop">Toucher l\'écran pour stopper l\'enregistrement</string>
+    <string name="minicon_record_txt">Enregistrement vidéo &#8230;</string>
+    <string name="minicon_upload_txt">Téléchargement du fichier &#8230;</string>
+    <string name="minicon_save_txt">Sauvegarde du fichier &#8230;</string>
+    <string name="restart">Recommencer</string>
+    <string name="replay">Revoir</string>
+    <string name="share">Partager</string>
+    <string name="edit">Edition</string>
+    <string name="camera">Caméra</string>
+    
+</resources>
