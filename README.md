@@ -1,4 +1,4 @@
 # Capsule projet
 
-Welcome bitches !
+Dailymotion hackaton paris 2013.
 
